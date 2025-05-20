@@ -41,6 +41,8 @@ do_compile:prepend () {
 	PKG_CONFIG_PATH="${RECIPE_SYSROOT_NATIVE}/usr/lib/pkgconfig:${PKG_CONFIG_PATH}"
 }
 
+# WIP: config.toml for RUST_VERSION>= 1.38%
+
 do_install () {
     SYS_BINDIR=$(dirname ${D}${bindir})
     install -d "${SYS_BINDIR}"
@@ -56,10 +58,10 @@ do_install () {
 	export CARGO_HOME="\$OECORE_TARGET_SYSROOT/home/cargo"
 	mkdir -p "\$CARGO_HOME"
         # Init the default target once, it might be otherwise user modified.
-	if [ ! -f "\$CARGO_HOME/config" ]; then
-		touch "\$CARGO_HOME/config"
-		echo "[build]" >> "\$CARGO_HOME/config"
-		echo 'target = "'${TARGET_SYS}'"' >> "\$CARGO_HOME/config"
+	if [ ! -f "\$CARGO_HOME/config.toml" ]; then
+		touch "\$CARGO_HOME/config.toml"
+		echo "[build]" >> "\$CARGO_HOME/config.toml"
+		echo 'target = "'${TARGET_SYS}'"' >> "\$CARGO_HOME/config.toml"
         fi
 
 	# Keep the below off as long as HTTP/2 is disabled.
