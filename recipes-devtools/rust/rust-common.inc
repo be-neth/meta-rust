@@ -337,6 +337,10 @@ def rust_gen_target(d, thing, wd, features, cpu, arch, abi=""):
     # build tspec
     tspec = {}
     tspec['llvm-target'] = d.getVarFlag('LLVM_TARGET', arch_abi)
+    # WIP: Hardcoded for Armv7
+    tspec['llvm-floatabi'] = "hard"
+    tspec['abi'] = "eabihf"
+    # End Hardcoded
     tspec['data-layout'] = d.getVarFlag('DATA_LAYOUT', arch_abi)
     tspec['max-atomic-width'] = int(d.getVarFlag('MAX_ATOMIC_WIDTH', arch_abi))
     tspec['target-pointer-width'] = d.getVarFlag('TARGET_POINTER_WIDTH', arch_abi)
